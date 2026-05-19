@@ -1,0 +1,9 @@
+
+
+model:
+  resolution: 256
+  out_channels: 3
+  base_channels: 128
+  num_res_blocks: 2
+  channel_multipliers: [1, 2, 4, 4]
+  attention_resolutions: []
