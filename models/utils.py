@@ -122,3 +122,40 @@ class SelfAttention(nn.Module):
         attn_output = self.Wo(attn_output)
 
         return attn_output + x
+
+class DiagonalGuassianDistribution:
+    """
+    Class defines a diagonal Gaussian distribution used in the reparameterization trick of the latent diffusion model.
+    @author: Stephen Krol
+    """
+    
+    def __init__(self, mean: torch.Tensor, logvar: torch.Tensor):
+        """
+        Constructor method initializes the mean and log variance of the diagonal Gaussian distribution.
+        @author: Stephen Krol
+
+        :param mean: Mean of the diagonal Gaussian distribution
+        :type mean: torch.Tensor
+        :param logvar: Log variance of the diagonal Gaussian distribution
+        :type logvar: torch.Tensor
+        """
+
+        self.mean = mean
+        self.logvar = torch.clamp(logvar, min=-30.0, max=20.0)
+
+    def sample(self) -> torch.Tensor:
+        """
+        Sample method samples from the diagonal Gaussian distribution using the reparameterization trick.
+        @author: Stephen Krol
+
+        :return: Sampled tensor of shape (batch_size, z_channels, height, width)
+        :rtype: torch.Tensor
+        """
+
+        std = torch.exp(0.5 * self.logvar)
+        eps = torch.randn_like(std).to(std.device)
+
+        return self.mean + eps * std
+
+
+
