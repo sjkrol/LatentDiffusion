@@ -4,3 +4,5 @@ __pycache__
 # file types
 *.parquet
 *.zip
+*.json
+*.tar
