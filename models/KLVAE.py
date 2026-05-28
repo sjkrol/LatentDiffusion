@@ -4,9 +4,9 @@ import yaml
 import torch
 import torch.nn as nn
 
-from decoder import Decoder
-from encoder import Encoder
-from utils import DiagonalGuassianDistribution
+from .decoder import Decoder
+from .encoder import Encoder
+from .utils import DiagonalGuassianDistribution
 
 class KLVAE(nn.Module):
 
@@ -119,7 +119,7 @@ class KLVAE(nn.Module):
 
 if __name__ == "__main__":
 
-    with open("../config/encoder.yaml", "r") as f:
+    with open("../config/KLVAE.yaml", "r") as f:
         config = yaml.safe_load(f)
 
     x = torch.randn(1, config["model"]["out_channels"], config["model"]["resolution"], config["model"]["resolution"])

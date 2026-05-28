@@ -4,7 +4,7 @@ import torch
 import yaml
 import torch.nn as nn
 
-from utils import GroupNorm, nonlinearity, ResBlock, SelfAttention
+from .utils import GroupNorm, nonlinearity, ResBlock, SelfAttention
 
 class Encoder(nn.Module):
 
