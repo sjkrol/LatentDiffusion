@@ -156,6 +156,17 @@ class DiagonalGuassianDistribution:
         eps = torch.randn_like(std).to(std.device)
 
         return self.mean + eps * std
+    
+    def kl(self) -> torch.Tensor:
+        """
+        KL method computes the KL divergence between the diagonal Gaussian distribution and a standard normal distribution.
+        @author: Stephen Krol
+
+        :return: KL divergence value
+        :rtype: torch.Tensor
+        """
+        
+        return 0.5 * torch.sum(self.mean.pow(2) + self.logvar.exp() - self.logvar - 1, dim=[1, 2, 3])
 
 
 
